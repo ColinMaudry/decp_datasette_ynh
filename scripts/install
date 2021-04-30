@@ -26,10 +26,10 @@ ynh_abort_if_errors
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
-admin=$YNH_APP_ARG_ADMIN
+# admin=$YNH_APP_ARG_ADMIN
 is_public=$YNH_APP_ARG_IS_PUBLIC
-language=$YNH_APP_ARG_LANGUAGE
-password=$YNH_APP_ARG_PASSWORD
+# language=$YNH_APP_ARG_LANGUAGE
+# password=$YNH_APP_ARG_PASSWORD
 
 ### If it's a multi-instance app, meaning it can be installed several times independently
 ### The id of the app as stated in the manifest is available as $YNH_APP_ID
@@ -41,7 +41,7 @@ password=$YNH_APP_ARG_PASSWORD
 ### The app instance name is probably what interests you most, since this is
 ### guaranteed to be unique. This is a good unique identifier to define installation path,
 ### db names...
-app=$YNH_APP_INSTANCE_NAME
+# app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
@@ -71,8 +71,8 @@ ynh_script_progression --message="Storing installation settings..." --time --wei
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
-ynh_app_setting_set --app=$app --key=admin --value=$admin
-ynh_app_setting_set --app=$app --key=language --value=$language
+# ynh_app_setting_set --app=$app --key=admin --value=$admin
+# ynh_app_setting_set --app=$app --key=language --value=$language
 
 #=================================================
 # STANDARD MODIFICATIONS
@@ -113,6 +113,8 @@ ynh_script_progression --message="Installing dependencies..." --time --weight=1
 
 ynh_install_app_dependencies $pkg_dependencies
 
+pip install datasette openpyxl
+
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
@@ -124,7 +126,7 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 # CREATE A MYSQL DATABASE
 #=================================================
-ynh_script_progression --message="Creating a MySQL database..." --time --weight=1
+# ynh_script_progression --message="Creating a MySQL database..." --time --weight=1
 
 ### Use these lines if you need a database for the application.
 ### `ynh_mysql_setup_db` will create a database, an associated user and a ramdom password.
@@ -135,10 +137,10 @@ ynh_script_progression --message="Creating a MySQL database..." --time --weight=
 ###		- Remove also the section "REMOVE THE MYSQL DATABASE" in the remove script
 ###		- As well as the section "RESTORE THE MYSQL DATABASE" in the restore script
 
-db_name=$(ynh_sanitize_dbid --db_name=$app)
-db_user=$db_name
-ynh_app_setting_set --app=$app --key=db_name --value=$db_name
-ynh_mysql_setup_db --db_user=$db_user --db_name=$db_name
+# db_name=$(ynh_sanitize_dbid --db_name=$app)
+# db_user=$db_name
+# ynh_app_setting_set --app=$app --key=db_name --value=$db_name
+# ynh_mysql_setup_db --db_user=$db_user --db_name=$db_name
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -176,7 +178,7 @@ ynh_add_nginx_config
 #=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring PHP-FPM..." --time --weight=1
+# ynh_script_progression --message="Configuring PHP-FPM..." --time --weight=1
 
 ### `ynh_add_fpm_config` is used to set up a PHP config.
 ### You can remove it if your app doesn't use PHP.
@@ -190,7 +192,7 @@ ynh_script_progression --message="Configuring PHP-FPM..." --time --weight=1
 ###		- And the section "PHP-FPM CONFIGURATION" in the upgrade script
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config
+# ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC SETUP
@@ -214,13 +216,13 @@ ynh_add_fpm_config
 ###
 ### Check the documentation of `ynh_add_config` for more info.
 
-ynh_add_config --template="some_config_file" --destination="$final_path/some_config_file"
-
-# FIXME: this should be handled by the core in the future
-# You may need to use chmod 600 instead of 400,
-# for example if the app is expected to be able to modify its own config
-chmod 400 "$final_path/some_config_file"
-chown $app:$app "$final_path/some_config_file"
+# ynh_add_config --template="some_config_file" --destination="$final_path/some_config_file"
+#
+# # FIXME: this should be handled by the core in the future
+# # You may need to use chmod 600 instead of 400,
+# # for example if the app is expected to be able to modify its own config
+# chmod 400 "$final_path/some_config_file"
+# chown $app:$app "$final_path/some_config_file"
 
 ### For more complex cases where you want to replace stuff using regexes,
 ### you shoud rely on ynh_replace_string (which is basically a wrapper for sed)
@@ -258,16 +260,16 @@ ynh_add_systemd_config
 ### forms.
 
 # Set the app as temporarily public for curl call
-ynh_script_progression --message="Configuring SSOwat..." --time --weight=1
-# Making the app public for curl
-ynh_permission_update --permission="main" --add="visitors"
-
-# Installation with curl
-ynh_script_progression --message="Finalizing installation..." --time --weight=1
-ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
-
-# Remove the public access
-ynh_permission_update --permission="main" --remove="visitors"
+# ynh_script_progression --message="Configuring SSOwat..." --time --weight=1
+# # Making the app public for curl
+# ynh_permission_update --permission="main" --add="visitors"
+#
+# # Installation with curl
+# ynh_script_progression --message="Finalizing installation..." --time --weight=1
+# ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
+#
+# # Remove the public access
+# ynh_permission_update --permission="main" --remove="visitors"
 
 #=================================================
 # GENERIC FINALIZATION
@@ -338,10 +340,10 @@ ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$ap
 #=================================================
 # SETUP FAIL2BAN
 #=================================================
-ynh_script_progression --message="Configuring Fail2Ban..." --time --weight=1
-
-# Create a dedicated Fail2Ban config
-ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
+# ynh_script_progression --message="Configuring Fail2Ban..." --time --weight=1
+#
+# # Create a dedicated Fail2Ban config
+# ynh_add_fail2ban_config --logpath="/var/log/nginx/${domain}-error.log" --failregex="Regex to match into the log for a failed login"
 
 #=================================================
 # SETUP SSOWAT
@@ -360,12 +362,12 @@ fi
 ### does have for example an admin interface or an api.
 
 # Only the admin can access the admin panel of the app (if the app has an admin panel)
-ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
-
-# Everyone can access to the api part
-# We don't want to display the tile in the sso so we put --show_tile="false"
-# And we don't want that the YunoHost Admin can remove visitors group to this permission, so we put --protected="true"
-ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
+# ynh_permission_create --permission="admin" --url="/admin" --allowed=$admin
+#
+# # Everyone can access to the api part
+# # We don't want to display the tile in the sso so we put --show_tile="false"
+# # And we don't want that the YunoHost Admin can remove visitors group to this permission, so we put --protected="true"
+# ynh_permission_create --permission="api" --url="/api" --allowed="visitors" --show_tile="false" --protected="true"
 
 #=================================================
 # RELOAD NGINX

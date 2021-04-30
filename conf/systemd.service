@@ -1,5 +1,5 @@
 [Unit]
-Description=Small description of the service
+Description=DECP datasette
 After=network.target
 
 [Service]
@@ -7,7 +7,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__FINALPATH__/
-ExecStart=__FINALPATH__/script
+ExecStart=__FINALPATH__/scripts/start-datasette.sh __PORT__
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 
