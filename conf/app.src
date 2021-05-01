@@ -1,4 +1,4 @@
-SOURCE_URL=https://github.com/ColinMaudry/decp_datasette_ynh/archive/refs/heads/master.zip
+SOURCE_URL=https://github.com/ColinMaudry/decp-table-schema-utils/archive/refs/heads/main.zip
 SOURCE_SUM=sha256 checksum
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=zip
