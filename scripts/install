@@ -113,7 +113,7 @@ ynh_script_progression --message="Installing dependencies..." --time --weight=1
 
 ynh_install_app_dependencies $pkg_dependencies
 
-pip install datasette openpyxl datapackage_to_datasette
+pip3 install datasette openpyxl datapackage_to_datasette
 
 #=================================================
 # CREATE DEDICATED USER
