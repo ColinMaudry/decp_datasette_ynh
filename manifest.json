@@ -6,7 +6,7 @@
         "en": "DECP datasette",
         "fr": "DECP datasette"
     },
-    "version": "1.0~ynh2",
+    "version": "1.0~ynh3",
     "url": "https://decp.info",
     "license": "free",
     "maintainer": {

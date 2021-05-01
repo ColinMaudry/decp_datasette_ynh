@@ -90,6 +90,7 @@ ynh_script_progression --message="Finding an available port..." --time --weight=
 port=$(ynh_find_port --port=8095)
 ynh_app_setting_set --app=$app --key=port --value=$port
 
+
 # Optional: Expose this port publicly
 # (N.B.: you only need to do this if the app actually needs to expose the port publicly.
 # If you do this and the app doesn't actually need you are CREATING SECURITY HOLES IN THE SERVER !)
@@ -155,6 +156,8 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$final_path"
 
+
+
 # FIXME: this should be managed by the core in the future
 # Here, as a packager, you may have to tweak the ownerhsip/permissions
 # such that the appropriate users (e.g. maybe www-data) can access
@@ -164,6 +167,8 @@ ynh_setup_source --dest_dir="$final_path"
 chmod 750 "$final_path"
 chmod -R o-rwx "$final_path"
 chown -R $app:www-data "$final_path"
+
+ynh_replace_string --match_string=9090 --replace_string=$port --target_file=$final_path/scripts/start-datasette.sh
 
 #=================================================
 # NGINX CONFIGURATION
@@ -249,6 +254,8 @@ ynh_script_progression --message="Configuring a systemd service..." --time --wei
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
+
+
 
 #=================================================
 # SETUP APPLICATION WITH CURL
