@@ -114,10 +114,10 @@ fi
 #=================================================
 
 # Remove a cron file
-ynh_secure_remove --file="/etc/cron.d/$app"
-
-# Remove a directory securely
-ynh_secure_remove --file="/etc/$app"
+# ynh_secure_remove --file="/etc/cron.d/$app"
+#
+# # Remove a directory securely
+# ynh_secure_remove --file="/etc/$app"
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
