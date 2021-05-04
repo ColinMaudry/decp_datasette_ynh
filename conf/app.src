@@ -1,5 +1,5 @@
 SOURCE_URL=https://github.com/ColinMaudry/decp-table-schema-utils/archive/refs/heads/main.zip
-SOURCE_SUM=561bdc601f5d42d9cf5c43be0c4444260b36ebf4f49e6d20cdc6f5edbbfeebdc
+SOURCE_SUM=5e05111b53675fddcf7a04f3d64fc5cedb7521441528f9aa67bb4533414ab15f
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=zip
 SOURCE_IN_SUBDIR=true
