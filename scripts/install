@@ -115,6 +115,7 @@ ynh_script_progression --message="Installing dependencies..." --time --weight=1
 ynh_install_app_dependencies $pkg_dependencies
 
 pip3 install datasette openpyxl datapackage_to_datasette
+pip3 install git+https://github.com/ColinMaudry/datasette-cluster-map.git
 
 #=================================================
 # CREATE DEDICATED USER
