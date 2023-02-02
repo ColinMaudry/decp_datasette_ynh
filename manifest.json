@@ -6,7 +6,7 @@
         "en": "DECP datasette",
         "fr": "DECP datasette"
     },
-    "version": "1.0~ynh3",
+    "version": "1.5~ynh1",
     "url": "https://decp.info",
     "license": "free",
     "maintainer": {
@@ -21,7 +21,8 @@
     "services": [
         "nginx",
         "python3-pip",
-        "python3"
+        "python3",
+        "pipenv"
     ],
     "arguments": {
         "install" : [
