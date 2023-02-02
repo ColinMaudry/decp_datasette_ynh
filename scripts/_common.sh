@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="nginx python3 python3-pip"
+pkg_dependencies="nginx python3 python3-pip pipenv"
 
 #=================================================
 # PERSONAL HELPERS

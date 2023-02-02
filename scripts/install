@@ -113,7 +113,6 @@ ynh_script_progression --message="Installing dependencies..." --time --weight=1
 ###		- And the section "UPGRADE DEPENDENCIES" in the upgrade script
 
 ynh_install_app_dependencies $pkg_dependencies
-pipenv install
 
 #=================================================
 # CREATE DEDICATED USER
@@ -168,6 +167,14 @@ chmod -R o-rwx "$final_path"
 chown -R $app:www-data "$final_path"
 
 ynh_replace_string --match_string=9090 --replace_string=$port --target_file=$final_path/scripts/start-datasette.sh
+
+## Python dependencies
+
+current_dir=`pwd`
+
+cd $final_path
+pipenv install
+cd $current_dir
 
 #=================================================
 # NGINX CONFIGURATION

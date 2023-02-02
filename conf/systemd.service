@@ -7,7 +7,7 @@ Type=simple
 User=__APP__
 Group=__APP__
 WorkingDirectory=__FINALPATH__/
-ExecStart=cd __FINALPATH__ && pipenv run scripts/start-datasette.sh
+ExecStart=pipenv run scripts/start-datasette.sh
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 
