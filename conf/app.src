@@ -1,5 +1,5 @@
 SOURCE_URL=https://github.com/ColinMaudry/decp.info/archive/refs/heads/main.zip
-SOURCE_SUM=fc0f3abe13a18ee10440333430f9c669e851b8032b367207205957bce3ddff33
+SOURCE_SUM=9c9854cf401029cd67890f6cfc1cb4a7dd35fd941f5cdb22ebda196f1cec322d
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=zip
 SOURCE_IN_SUBDIR=true
