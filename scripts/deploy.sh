@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ssh yuno 'yunohost app remove decp-datasette'
-ssh yuno 'yunohost app remove decp-datasette__2'
+ssh yuno_root 'yunohost app remove decp-datasette'
+ssh yuno_root 'yunohost app remove decp-datasette__2'
 
 for branch in main develop
 do
@@ -13,7 +13,7 @@ do
 
 done
 
-ssh yuno 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/main --args "domain=decp.info&path=/&is_public=true"'
-ssh yuno 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/develop --args "domain=test.decp.info&path=/&is_public=true"'
+ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/main --args "domain=decp.info&path=/&is_public=true"'
+ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/develop --args "domain=test.decp.info&path=/&is_public=true"'
 
 
