@@ -13,7 +13,7 @@ do
 
 done
 
-ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/main --label decp.info-prod --args "domain=decp.info&path=/&is_public=true"'
-ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/develop --label decp.info-test --args "domain=test.decp.info&path=/&is_public=true"'
+ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/main --args "domain=decp.info&path=/&is_public=true"'
+ssh yuno_root 'yunohost app install -f https://github.com/ColinMaudry/decp_datasette_ynh/tree/develop --args "domain=test.decp.info&path=/&is_public=true"'
 
 
