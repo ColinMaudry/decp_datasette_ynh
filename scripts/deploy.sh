@@ -9,7 +9,7 @@ do
 	git checkout $branch
 	sed -i -E "s/(SOURCE_SUM=)[a-f0-9]+/\1${hash:0:64}/" conf/app.src
 	git commit -am "Updated hash"
-	git push origin $branchsh
+	git push origin $branch
 
 done
 
